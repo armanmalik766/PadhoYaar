@@ -1,4 +1,4 @@
-import { SyllabusSection } from '../../../types/syllabus.ts';
+import { SyllabusSection } from '../../../types/syllabus';
 
 export const mainsGS1: SyllabusSection = {
     examStage: 'MAINS',

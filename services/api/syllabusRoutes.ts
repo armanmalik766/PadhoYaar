@@ -1,5 +1,5 @@
-import { syllabusController } from './syllabusController.ts';
-import { SyllabusFilter, SyllabusSection } from '../../types/syllabus.ts';
+import { syllabusController } from './syllabusController';
+import { SyllabusFilter, SyllabusSection } from '../../types/syllabus';
 
 // Simulating a route handler. 
 // In a real backend, this would take (req, res).

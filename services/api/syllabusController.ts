@@ -1,20 +1,20 @@
-import { SyllabusSection, SyllabusFilter } from '../../types/syllabus.ts';
+import { SyllabusSection, SyllabusFilter } from '../../types/syllabus';
 
 // Import all data
-import { prelimsHistory } from '../data/prelims/history.ts';
-import { prelimsPolity } from '../data/prelims/polity.ts';
-import { prelimsGeography } from '../data/prelims/geography.ts';
-import { prelimsEconomy } from '../data/prelims/economy.ts';
-import { prelimsEnvironment } from '../data/prelims/environment.ts';
-import { prelimsScience } from '../data/prelims/science.ts';
+import { prelimsHistory } from '../data/prelims/history';
+import { prelimsPolity } from '../data/prelims/polity';
+import { prelimsGeography } from '../data/prelims/geography';
+import { prelimsEconomy } from '../data/prelims/economy';
+import { prelimsEnvironment } from '../data/prelims/environment';
+import { prelimsScience } from '../data/prelims/science';
 
-import { mainsGS1 } from '../data/mains/gs1.ts';
-import { mainsGS2 } from '../data/mains/gs2.ts';
-import { mainsGS3 } from '../data/mains/gs3.ts';
-import { mainsGS4 } from '../data/mains/gs4.ts';
-import { mainsEssay } from '../data/mains/essay.ts';
+import { mainsGS1 } from '../data/mains/gs1';
+import { mainsGS2 } from '../data/mains/gs2';
+import { mainsGS3 } from '../data/mains/gs3';
+import { mainsGS4 } from '../data/mains/gs4';
+import { mainsEssay } from '../data/mains/essay';
 
-import { interviewData } from '../data/interview.ts';
+import { interviewData } from '../data/interview';
 
 // Aggregate all data into a single queryable structure
 const ALL_SYLLABUS_DATA: SyllabusSection[] = [

@@ -1,5 +1,5 @@
-import { syllabusRouter } from './syllabusRoutes.ts';
-import { SyllabusFilter, SyllabusSection } from '../../types/syllabus.ts';
+import { syllabusRouter } from './syllabusRoutes';
+import { SyllabusFilter, SyllabusSection } from '../../types/syllabus';
 
 /**
  * Fetches syllabus data based on the provided filter.

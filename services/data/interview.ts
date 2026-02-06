@@ -1,4 +1,4 @@
-import { SyllabusSection } from '../../types/syllabus.ts';
+import { SyllabusSection } from '../../types/syllabus';
 
 export const interviewData: SyllabusSection = {
     examStage: 'INTERVIEW',

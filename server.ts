@@ -7,10 +7,10 @@ import mongoose from 'mongoose';
 import Razorpay from 'razorpay';
 import crypto from 'crypto';
 
-import { getSyllabus } from './services/api/syllabusApi.ts';
-import { fetchRSSFeeds } from './services/api/rssService.ts';
-import { User, Task, QuizResult, SyllabusTracker } from './models/index.ts';
-import { plannerEngine } from './services/planner/PlannerEngine.ts';
+import { getSyllabus } from './services/api/syllabusApi';
+import { fetchRSSFeeds } from './services/api/rssService';
+import { User, Task, QuizResult, SyllabusTracker } from './models/index';
+import { plannerEngine } from './services/planner/PlannerEngine';
 
 const app = express();
 app.use(cors());
@@ -534,7 +534,7 @@ app.get('/api/syllabus', async (req, res) => {
 });
 
 /* ================= QUIZ ================= */
-import { getQuizQuestions } from './services/api/quizApi.ts';
+import { getQuizQuestions } from './services/api/quizApi';
 
 app.get('/api/quiz', async (req, res) => {
   try {
@@ -653,8 +653,8 @@ app.get('/api/current-affairs/today', async (req, res) => {
 });
 
 /* ================= START ================= */
-app.listen(PORT, () => {
-  console.log(`🚀 Backend running on http://localhost:${PORT}`);
+app.listen(Number(PORT), '0.0.0.0', () => {
+  console.log(`🚀 Backend running on port ${PORT}`);
 });
 
 // Force restart trigger - 24h Filter Added

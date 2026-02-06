@@ -1,6 +1,6 @@
-import { SyllabusTracker, Task, User, IUser, ITask, ISyllabusTracker } from '../../models/index.ts';
-import { syllabusService, FlatTopic } from './SyllabusService.ts';
-import { syllabusController } from '../api/syllabusController.ts';
+import { SyllabusTracker, Task, User, IUser, ITask, ISyllabusTracker } from '../../models/index';
+import { syllabusService, FlatTopic } from './SyllabusService';
+import { syllabusController } from '../api/syllabusController';
 import crypto from 'crypto';
 
 const generateTopicId = (path: string) => crypto.createHash('md5').update(path).digest('hex');

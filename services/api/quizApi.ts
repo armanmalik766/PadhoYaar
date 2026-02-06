@@ -1,20 +1,20 @@
-import { questions as history } from '../data/questions/prelims/history.ts';
-import { questions as polity } from '../data/questions/prelims/polity.ts';
-import { questions as geography } from '../data/questions/prelims/geography.ts';
-import { questions as economy } from '../data/questions/prelims/economy.ts';
-import { questions as environment } from '../data/questions/prelims/environment.ts';
-import { questions as science } from '../data/questions/prelims/science.ts';
+import { questions as history } from '../data/questions/prelims/history';
+import { questions as polity } from '../data/questions/prelims/polity';
+import { questions as geography } from '../data/questions/prelims/geography';
+import { questions as economy } from '../data/questions/prelims/economy';
+import { questions as environment } from '../data/questions/prelims/environment';
+import { questions as science } from '../data/questions/prelims/science';
 
-import { questions as gs1 } from '../data/questions/mains/gs1.ts';
-import { questions as gs2 } from '../data/questions/mains/gs2.ts';
-import { questions as gs3 } from '../data/questions/mains/gs3.ts';
-import { questions as gs4 } from '../data/questions/mains/gs4.ts';
+import { questions as gs1 } from '../data/questions/mains/gs1';
+import { questions as gs2 } from '../data/questions/mains/gs2';
+import { questions as gs3 } from '../data/questions/mains/gs3';
+import { questions as gs4 } from '../data/questions/mains/gs4';
 
-import { questions as ethics } from '../data/questions/interview/ethics.ts';
-import { questions as administration } from '../data/questions/interview/administration.ts';
+import { questions as ethics } from '../data/questions/interview/ethics';
+import { questions as administration } from '../data/questions/interview/administration';
 
-import { questions as currentAffairs } from '../data/questions/currentAffairs/daily.ts';
-import { questions as csatGeneral } from '../data/questions/csat/general.ts';
+import { questions as currentAffairs } from '../data/questions/currentAffairs/daily';
+import { questions as csatGeneral } from '../data/questions/csat/general';
 
 // Map all questions
 const QUESTION_BANK: any = {

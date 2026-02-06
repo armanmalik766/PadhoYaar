@@ -1,4 +1,4 @@
-import { syllabusController } from '../api/syllabusController.ts';
+import { syllabusController } from '../api/syllabusController';
 import crypto from 'crypto';
 
 export interface FlatTopic {

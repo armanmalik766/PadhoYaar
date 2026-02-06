@@ -1,0 +1,13 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "4fd2b7cf-b9cb-4607-a287-3d7fdedbb365"
+      }
+    },
+    "owner": "malikarman",
+    "android": {
+      "package": "com.malikarman.padhoyaar"
+    }
+  }
+}

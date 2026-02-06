@@ -35,7 +35,7 @@ declare global {
 
 const RAZORPAY_KEY_ID = 'rzp_test_RkLTHtI4AKt7wl';
 // Use local IP for Physical Devices/Emulators. CHANGE THIS if your IP changes.
-const API_URL = Platform.OS === 'web' ? 'http://localhost:5000' : 'http://172.16.2.33:5000';
+const API_URL = Platform.OS === 'web' ? 'http://localhost:5000' : 'http://192.168.1.9:5000';
 
 const SubscriptionScreen: React.FC<SubscriptionScreenProps> = ({ onBack }) => {
   const { user, updateSubscription } = useStore();

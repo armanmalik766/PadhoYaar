@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import express from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import Razorpay from 'razorpay';
@@ -43,7 +43,7 @@ const razorpay = new Razorpay({
 /* ================= PROGRESS & LEADERBOARD ================= */
 
 // 3. User Progress API
-app.get('/api/progress/:userId', async (req, res) => {
+app.get('/api/progress/:userId', async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
 
@@ -119,7 +119,7 @@ app.get('/api/progress/:userId', async (req, res) => {
 });
 
 // 4. Global Leaderboard API
-app.get('/api/leaderboard', async (req, res) => {
+app.get('/api/leaderboard', async (req: Request, res: Response) => {
   try {
     const { period } = req.query; // 'weekly' or 'allTime' (default)
 
@@ -215,12 +215,12 @@ app.get('/api/leaderboard', async (req, res) => {
 });
 
 /* ================= HEALTH ================= */
-app.get('/api/health', (_, res) => {
+app.get('/api/health', (_: Request, res: Response) => {
   res.json({ status: 'ok', time: new Date().toISOString() });
 });
 
 /* ================= USER ================= */
-app.post('/api/tasks/bookmark', async (req, res) => {
+app.post('/api/tasks/bookmark', async (req: Request, res: Response) => {
   try {
     const { taskId, isBookmarked } = req.body;
     const task = await Task.findByIdAndUpdate(taskId, { isBookmarked }, { new: true });
@@ -232,7 +232,7 @@ app.post('/api/tasks/bookmark', async (req, res) => {
   }
 });
 
-app.post('/api/sync-user', async (req, res) => {
+app.post('/api/sync-user', async (req: Request, res: Response) => {
   try {
     const { email, mode, ...data } = req.body;
 
@@ -276,7 +276,7 @@ app.post('/api/sync-user', async (req, res) => {
 });
 
 /* ================= PLANNER ENGINE ================= */
-app.post('/api/planner/generate', async (req, res) => {
+app.post('/api/planner/generate', async (req: Request, res: Response) => {
   try {
     const { userId } = req.body; // user email or id
     console.log('Generating plan for:', userId);
@@ -298,7 +298,7 @@ app.post('/api/planner/generate', async (req, res) => {
   }
 });
 
-app.post('/api/planner/complete-block', async (req, res) => {
+app.post('/api/planner/complete-block', async (req: Request, res: Response) => {
   try {
     const { userId, taskId } = req.body;
     const task = await plannerEngine.completeBlock(userId, taskId);
@@ -310,7 +310,7 @@ app.post('/api/planner/complete-block', async (req, res) => {
   }
 });
 
-app.post('/api/planner/skip-block', async (req, res) => {
+app.post('/api/planner/skip-block', async (req: Request, res: Response) => {
   try {
     const { userId, taskId, daysToSkip } = req.body;
     const task = await plannerEngine.skipBlock(userId, taskId, daysToSkip);
@@ -322,9 +322,9 @@ app.post('/api/planner/skip-block', async (req, res) => {
   }
 });
 
-app.get('/api/planner/stats/:userId', async (req, res) => {
+app.get('/api/planner/stats/:userId', async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params;
+    const userId = req.params.userId as string;
     const stats = await plannerEngine.getStats(userId);
     res.json({ success: true, stats });
   } catch (error) {
@@ -333,9 +333,9 @@ app.get('/api/planner/stats/:userId', async (req, res) => {
   }
 });
 
-app.get('/api/planner/syllabus-status/:userId', async (req, res) => {
+app.get('/api/planner/syllabus-status/:userId', async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params;
+    const userId = req.params.userId as string;
     const statusTree = await plannerEngine.getSyllabusStatus(userId);
     res.json({ success: true, tree: statusTree });
   } catch (error) {
@@ -344,7 +344,7 @@ app.get('/api/planner/syllabus-status/:userId', async (req, res) => {
   }
 });
 
-app.post('/api/planner/toggle-topic', async (req, res) => {
+app.post('/api/planner/toggle-topic', async (req: Request, res: Response) => {
   try {
     const { userId, topicPath, status } = req.body;
     const tracker = await plannerEngine.toggleTopic(userId, topicPath, status);
@@ -372,7 +372,7 @@ function generateMockPlan(limit = 5) {
 }
 
 /* ================= PLAN ================= */
-app.post('/api/generate-plan', async (req, res) => {
+app.post('/api/generate-plan', async (req: Request, res: Response) => {
   try {
     const { userId, limit = 5 } = req.body;
 
@@ -394,7 +394,7 @@ app.post('/api/generate-plan', async (req, res) => {
 });
 
 /* ================= TASKS ================= */
-app.get('/api/tasks/:userId', async (req, res) => {
+app.get('/api/tasks/:userId', async (req: Request, res: Response) => {
   try {
     const today = new Date().toISOString().split('T')[0];
     let tasks = await Task.find({
@@ -404,7 +404,7 @@ app.get('/api/tasks/:userId', async (req, res) => {
 
     if (tasks.length === 0) {
       console.log(`Auto-generating plan for ${req.params.userId}`);
-      tasks = await plannerEngine.generateDailyPlan(req.params.userId, today);
+      tasks = await plannerEngine.generateDailyPlan(req.params.userId as string, today);
     }
 
     res.json(tasks);
@@ -413,7 +413,7 @@ app.get('/api/tasks/:userId', async (req, res) => {
   }
 });
 
-app.patch('/api/tasks/:taskId', async (req, res) => {
+app.patch('/api/tasks/:taskId', async (req: Request, res: Response) => {
   try {
     const task = await Task.findByIdAndUpdate(
       req.params.taskId,
@@ -427,7 +427,7 @@ app.patch('/api/tasks/:taskId', async (req, res) => {
 });
 
 /* ================= STREAK ================= */
-app.get('/api/streak/:userId', async (req, res) => {
+app.get('/api/streak/:userId', async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
 
@@ -512,7 +512,7 @@ app.get('/api/streak/:userId', async (req, res) => {
 });
 
 /* ================= SYLLABUS ================= */
-app.get('/api/syllabus', async (req, res) => {
+app.get('/api/syllabus', async (req: Request, res: Response) => {
   try {
     const { examStage, subject, paper } = req.query;
 
@@ -536,7 +536,7 @@ app.get('/api/syllabus', async (req, res) => {
 /* ================= QUIZ ================= */
 import { getQuizQuestions } from './services/api/quizApi';
 
-app.get('/api/quiz', async (req, res) => {
+app.get('/api/quiz', async (req: Request, res: Response) => {
   try {
     const { category, subject, limit } = req.query;
     console.log('GET /api/quiz', { category, subject, limit }); // DEBUG LOG
@@ -556,7 +556,7 @@ app.get('/api/quiz', async (req, res) => {
   }
 });
 
-app.post('/api/quiz/submit', async (req, res) => {
+app.post('/api/quiz/submit', async (req: Request, res: Response) => {
   try {
     const result = new QuizResult(req.body);
     await result.save();
@@ -584,7 +584,7 @@ app.post('/api/quiz/submit', async (req, res) => {
   }
 });
 
-app.get('/api/quiz/results/:userId', async (req, res) => {
+app.get('/api/quiz/results/:userId', async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
     const results = await QuizResult.find({ userId }).sort({ date: -1 });
@@ -596,7 +596,7 @@ app.get('/api/quiz/results/:userId', async (req, res) => {
 });
 
 /* ================= PAYMENT API ================= */
-app.post('/api/create-order', async (req, res) => {
+app.post('/api/create-order', async (req: Request, res: Response) => {
   try {
     const { amount, currency = 'INR' } = req.body;
     const options = {
@@ -612,7 +612,7 @@ app.post('/api/create-order', async (req, res) => {
   }
 });
 
-app.post('/api/verify-payment', async (req, res) => {
+app.post('/api/verify-payment', async (req: Request, res: Response) => {
   try {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
     const key_secret = process.env.RAZORPAY_KEY_SECRET || '';
@@ -634,7 +634,7 @@ app.post('/api/verify-payment', async (req, res) => {
 });
 
 /* ================= CURRENT AFFAIRS ================= */
-app.get('/api/current-affairs/today', async (req, res) => {
+app.get('/api/current-affairs/today', async (req: Request, res: Response) => {
   try {
     const items = await fetchRSSFeeds();
 
